@@ -3,12 +3,12 @@
 import { INDICATORS } from './catalog.js';
 
 const loaders = {
-  people: () => import('../data/people.js'),
-  economy: () => import('../data/economy.js'),
-  labour: () => import('../data/labour.js'),
-  wellbeing: () => import('../data/wellbeing.js'),
-  environment: () => import('../data/environment.js'),
-  peers: () => import('../data/peers.js'),
+  people: () => import('../series/people.js'),
+  economy: () => import('../series/economy.js'),
+  labour: () => import('../series/labour.js'),
+  wellbeing: () => import('../series/wellbeing.js'),
+  environment: () => import('../series/environment.js'),
+  peers: () => import('../series/peers.js'),
 };
 
 const modules = new Map();

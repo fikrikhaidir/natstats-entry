@@ -3,7 +3,7 @@
 import { INDICATORS, TOPICS, indicatorsOfTopic } from '../catalog.js';
 import { loadEverything, seriesOf } from '../data-store.js';
 import { h } from '../dom.js';
-import { formatChange, formatValue, shorten } from '../format.js';
+import { axisShort, formatChange, formatValue } from '../format.js';
 import { lineChart } from '../charts/line-chart.js';
 import { csvButton, dataTable } from '../ui/data-table.js';
 import { pageHeader } from '../ui/page-header.js';
@@ -46,7 +46,7 @@ export async function render({ query }) {
     const body =
       state.view === 'table'
         ? dataTable([{ label: 'Year', align: 'left' }, { label: ind.label }], [...points].reverse().map((p) => [String(p.year), formatValue(ind, p.value)]), ind.label)
-        : lineChart({ series: [{ label: ind.label, points }], format: (v) => formatValue(ind, v), axisFormat: (v) => (ind.kind === 'big' ? `${ind.prefix}${shorten(v, { decimals: 0 })}` : `${ind.prefix}${v.toLocaleString('en-US', { maximumFractionDigits: 1 })}${ind.suffix.startsWith('%') ? '%' : ''}`), area: true, label: `${ind.label}, ${first.year} to ${last.year}` });
+        : lineChart({ series: [{ label: ind.label, points }], format: (v) => formatValue(ind, v), axisFormat: (v) => (ind.kind === 'big' ? `${ind.prefix}${axisShort(v)}` : `${ind.prefix}${v.toLocaleString('en-US', { maximumFractionDigits: 1 })}${ind.suffix.startsWith('%') ? '%' : ''}`), area: true, label: `${ind.label}, ${first.year} to ${last.year}` });
     out.replaceChildren(
       h('div', { class: 'mini-stats' },
         stat(`${last.year}`, formatValue(ind, last.value), 'latest in range'),

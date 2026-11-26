@@ -1,5 +1,5 @@
 // The catalogue: every indicator the site shows (World Bank code, label, how to format it, who compiled it)
-// and the topic pages they belong to. The numbers themselves live in app/data/, one file per topic.
+// and the topic pages they belong to. The numbers themselves live in app/series/, one file per topic.
 
 const WDI = 'World Bank WDI';
 
@@ -23,16 +23,16 @@ const ROWS = [
   ['SP.DYN.CBRT.IN', 'people', 'Birth rate', 'plain', 1, '', ' per 1,000', 'rate', 'UN Population Division', 'Live births per 1,000 people in a year.'],
   ['SP.DYN.CDRT.IN', 'people', 'Death rate', 'plain', 1, '', ' per 1,000', 'rate', 'UN Population Division', 'Deaths per 1,000 people in a year.'],
 
-  ['NY.GDP.MKTP.CD', 'economy', 'GDP', 'big', 2, 'US$', '', 'count', 'World Bank and OECD national accounts data', 'Gross domestic product at market prices, current US dollars.'],
-  ['NY.GDP.PCAP.CD', 'economy', 'GDP per person', 'plain', 0, 'US$', '', 'count', 'World Bank and OECD national accounts data', 'GDP divided by mid-year population, current US dollars.'],
-  ['NY.GDP.MKTP.KD.ZG', 'economy', 'GDP growth', 'plain', 1, '', '%', 'percent', 'World Bank and OECD national accounts data', 'Annual growth of GDP at constant prices.'],
+  ['NY.GDP.MKTP.CD', 'economy', 'GDP', 'big', 2, 'US$', '', 'count', 'National statistical offices; World Bank and OECD national accounts files', 'Gross domestic product at market prices, current US dollars.'],
+  ['NY.GDP.PCAP.CD', 'economy', 'GDP per person', 'plain', 0, 'US$', '', 'count', 'National statistical offices; World Bank and OECD national accounts files', 'GDP divided by mid-year population, current US dollars.'],
+  ['NY.GDP.MKTP.KD.ZG', 'economy', 'GDP growth', 'plain', 1, '', '%', 'percent', 'National statistical offices; World Bank and OECD national accounts files', 'Annual growth of GDP at constant prices.'],
   ['FP.CPI.TOTL.ZG', 'economy', 'Inflation', 'plain', 1, '', '%', 'percent', 'IMF International Financial Statistics', 'Annual change in consumer prices.'],
-  ['NE.EXP.GNFS.ZS', 'economy', 'Exports of goods and services', 'plain', 1, '', '% of GDP', 'percent', 'World Bank and OECD national accounts data', 'Value of exports as a share of GDP.'],
-  ['NE.IMP.GNFS.ZS', 'economy', 'Imports of goods and services', 'plain', 1, '', '% of GDP', 'percent', 'World Bank and OECD national accounts data', 'Value of imports as a share of GDP.'],
-  ['BX.KLT.DINV.WD.GD.ZS', 'economy', 'Foreign direct investment', 'plain', 1, '', '% of GDP', 'percent', 'IMF Balance of Payments Statistics', 'Net inflows of foreign direct investment as a share of GDP.'],
-  ['NV.AGR.TOTL.ZS', 'economy', 'Agriculture, value added', 'plain', 1, '', '% of GDP', 'percent', 'World Bank and OECD national accounts data', 'Farming, forestry and fishing as a share of GDP.'],
-  ['NV.IND.TOTL.ZS', 'economy', 'Industry, value added', 'plain', 1, '', '% of GDP', 'percent', 'World Bank and OECD national accounts data', 'Mining, manufacturing, construction and utilities as a share of GDP.'],
-  ['NV.SRV.TOTL.ZS', 'economy', 'Services, value added', 'plain', 1, '', '% of GDP', 'percent', 'World Bank and OECD national accounts data', 'Trade, transport, finance, public and other services as a share of GDP.'],
+  ['NE.EXP.GNFS.ZS', 'economy', 'Exports of goods and services', 'plain', 1, '', '% of GDP', 'percent', 'National statistical offices; World Bank and OECD national accounts files', 'Value of exports as a share of GDP.'],
+  ['NE.IMP.GNFS.ZS', 'economy', 'Imports of goods and services', 'plain', 1, '', '% of GDP', 'percent', 'National statistical offices; World Bank and OECD national accounts files', 'Value of imports as a share of GDP.'],
+  ['BX.KLT.DINV.WD.GD.ZS', 'economy', 'Foreign direct investment', 'plain', 1, '', '% of GDP', 'percent', 'IMF International Financial Statistics and Balance of Payments databases', 'Net inflows of foreign direct investment as a share of GDP.'],
+  ['NV.AGR.TOTL.ZS', 'economy', 'Agriculture, value added', 'plain', 1, '', '% of GDP', 'percent', 'National statistical offices; World Bank and OECD national accounts files', 'Farming, forestry and fishing as a share of GDP.'],
+  ['NV.IND.TOTL.ZS', 'economy', 'Industry, value added', 'plain', 1, '', '% of GDP', 'percent', 'National statistical offices; World Bank and OECD national accounts files', 'Mining, manufacturing, construction and utilities as a share of GDP.'],
+  ['NV.SRV.TOTL.ZS', 'economy', 'Services, value added', 'plain', 1, '', '% of GDP', 'percent', 'National statistical offices; World Bank and OECD national accounts files', 'Trade, transport, finance, public and other services as a share of GDP.'],
 
   ['SL.UEM.TOTL.ZS', 'labour', 'Unemployment', 'plain', 1, '', '%', 'percent', 'ILO modelled estimates', 'Share of the labour force without work but available and looking for it.'],
   ['SL.TLF.CACT.ZS', 'labour', 'Labour force participation', 'plain', 1, '', '%', 'percent', 'ILO modelled estimates', 'People aged 15+ who work or look for work, as a share of that age group.'],
@@ -52,8 +52,8 @@ const ROWS = [
   ['SE.XPD.TOTL.GD.ZS', 'wellbeing', 'Education spending', 'plain', 1, '', '% of GDP', 'percent', 'UNESCO Institute for Statistics', 'Government spending on education as a share of GDP.'],
 
   ['EN.GHG.CO2.PC.CE.AR5', 'environment', 'CO₂ emissions per person', 'plain', 2, '', ' t', 'count', 'EDGAR (European Commission JRC) via WDI', 'Tonnes of carbon dioxide per person, excluding land use change and forestry.'],
-  ['EG.ELC.ACCS.ZS', 'environment', 'Access to electricity', 'plain', 1, '', '%', 'percent', 'Sustainable Energy for All; Tracking SDG7', 'Share of the population with electricity at home.'],
-  ['EG.FEC.RNEW.ZS', 'environment', 'Renewable share of energy', 'plain', 1, '', '%', 'percent', 'IEA; Sustainable Energy for All', 'Renewables as a share of final energy consumption.'],
+  ['EG.ELC.ACCS.ZS', 'environment', 'Access to electricity', 'plain', 1, '', '%', 'percent', 'World Bank ESMAP, SDG 7.1.1 electrification dataset', 'Share of the population with electricity at home.'],
+  ['EG.FEC.RNEW.ZS', 'environment', 'Renewable share of energy', 'plain', 1, '', '%', 'percent', 'IEA Energy Statistics', 'Renewables as a share of final energy consumption.'],
   ['AG.LND.FRST.ZS', 'environment', 'Forest area', 'plain', 1, '', '% of land', 'percent', 'FAO Global Forest Resources Assessment', 'Land under natural or planted trees at least 5 m tall.'],
   ['IT.NET.USER.ZS', 'environment', 'Internet users', 'plain', 1, '', '% of people', 'percent', 'International Telecommunication Union', 'People who used the internet in the last three months.'],
   ['IT.CEL.SETS.P2', 'environment', 'Mobile subscriptions', 'plain', 0, '', ' per 100', 'rate', 'International Telecommunication Union', 'Active mobile-cellular subscriptions per 100 people.'],

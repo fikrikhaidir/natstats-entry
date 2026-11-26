@@ -6,14 +6,14 @@
 import { INDICATORS } from '../catalog.js';
 import { seriesOf } from '../data-store.js';
 import { h } from '../dom.js';
-import { formatValue, shorten } from '../format.js';
+import { axisShort, formatValue } from '../format.js';
 import { lineChart } from '../charts/line-chart.js';
 import { stackedColumns } from '../charts/stacked-columns.js';
 import { csvButton, dataTable } from './data-table.js';
 import { sourceLine } from './source-chip.js';
 import { tabs } from './tabs.js';
 
-const axisFor = (ind) => (value) => (ind.kind === 'big' ? shorten(value, { decimals: 0 }).replace(/^/, ind.prefix) : `${ind.prefix}${value.toLocaleString('en-US', { maximumFractionDigits: ind.decimals > 0 ? 1 : 0 })}${ind.suffix.startsWith('%') ? '%' : ''}`);
+const axisFor = (ind) => (value) => (ind.kind === 'big' ? `${ind.prefix}${axisShort(value)}` : `${ind.prefix}${value.toLocaleString('en-US', { maximumFractionDigits: ind.decimals > 0 ? 1 : 0 })}${ind.suffix.startsWith('%') ? '%' : ''}`);
 
 function trim(points, range) {
   return range === 'all' ? points : points.filter((p) => p.year > points.at(-1).year - Number(range));

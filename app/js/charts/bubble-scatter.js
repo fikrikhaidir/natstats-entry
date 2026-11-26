@@ -34,7 +34,9 @@ export function bubbleScatter({ dots, xFormat, yFormat, xTitle, yTitle, height =
       const r = 6 + Math.sqrt(dot.size / maxSize) * 18;
       const cx = x(dot.x);
       const cy = y(dot.y);
-      const above = order.indexOf(dot) % 2 === 1;
+      const home = dots.find((d) => d.highlight);
+      const nextToHome = !dot.highlight && home && Math.abs(Math.log10(dot.x / home.x)) < 0.12; // neighbours of the highlighted bubble go above it
+      const above = dot.highlight ? false : nextToHome || order.indexOf(dot) % 2 === 1;
       const place = { x: Math.min(cx, width - 30), y: above ? cy - r - 6 : cy + r + 14, anchor: 'middle' };
       root.append(
         svg('g', { class: dot.highlight ? 'bubble is-home' : 'bubble' },

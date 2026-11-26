@@ -3,7 +3,7 @@
 import { COUNTRIES, INDICATORS, TOPICS } from '../catalog.js';
 import { latestOf, loadEverything, peerData, seriesOf } from '../data-store.js';
 import { h } from '../dom.js';
-import { formatValue, shorten } from '../format.js';
+import { axisShort, formatValue } from '../format.js';
 import { lineChart } from '../charts/line-chart.js';
 import { rankedBars } from '../charts/ranked-bars.js';
 import { TOPIC_PATH, hrefTo } from '../routes.js';
@@ -34,7 +34,7 @@ function heroCard() {
       lineChart({
         series: [{ label: ind.label, points: seriesOf(code) }],
         format: (v) => formatValue(ind, v),
-        axisFormat: (v) => (ind.kind === 'big' ? `${ind.prefix}${shorten(v, { decimals: 0 })}` : `${ind.prefix}${v.toLocaleString('en-US')}`),
+        axisFormat: (v) => (ind.kind === 'big' ? `${ind.prefix}${axisShort(v)}` : `${ind.prefix}${v.toLocaleString('en-US')}`),
         area: true,
         height: 140,
         label: `${ind.label}, ${first.year} to ${last.year}`,

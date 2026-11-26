@@ -26,6 +26,9 @@ export function shorten(value, { long = false, decimals = 1 } = {}) {
   return group(value, abs >= 100 ? 0 : decimals);
 }
 
+// Axis labels: "1.5T", "500B", "250M" (one decimal only when it is needed).
+export const axisShort = (value) => shorten(value, { decimals: 1 }).replace(/\.0(?=[A-Z]?$)/, '');
+
 // Format a value of one indicator, e.g. formatValue(ind, 5.05) -> "5.1%".
 export function formatValue(ind, value, { short = false } = {}) {
   if (value == null || Number.isNaN(value)) return 'n/a';
@@ -39,7 +42,7 @@ export function formatValue(ind, value, { short = false } = {}) {
 // Signed change, used for "since 2000" style captions.
 export function formatChange(ind, from, to) {
   if (from == null || to == null) return '';
-  if (ind.unit === 'percent' || ind.unit === 'rate') {
+  if (ind.unit === 'percent') {
     const diff = to - from;
     return `${diff >= 0 ? '+' : '−'}${group(Math.abs(diff), 1)} pts`;
   }

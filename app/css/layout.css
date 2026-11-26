@@ -31,7 +31,7 @@
   border-bottom: 1px solid var(--border);
 }
 .page { max-width: 1120px; margin: 0 auto; padding: 18px 28px 56px; outline: none; }
-.view { display: grid; gap: 18px; }
+.view { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 .loading { color: var(--muted); padding: 40px 0; }
 
 .page-head { display: grid; gap: 6px; padding: 2px 0 6px; }

@@ -8,7 +8,7 @@ export const title = 'Work & poverty';
 export const render = () =>
   renderTopic({
     topic: 'labour',
-    title: 'Jobs, pay-packets and poverty',
+    title: 'Jobs, sectors and poverty',
     lede: 'Unemployment is low and farm work is shrinking as jobs move to factories and services. Extreme poverty has fallen sharply.',
     headline: ['SL.UEM.TOTL.ZS', 'SL.TLF.CACT.ZS', 'SL.TLF.CACT.FE.ZS', 'SI.POV.DDAY'],
     notes: () => {

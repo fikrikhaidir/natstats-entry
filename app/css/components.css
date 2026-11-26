@@ -82,7 +82,7 @@ kbd { padding: 2px 7px; border-radius: 6px; border: 1px solid var(--border-stron
 .hero-chart { min-height: 140px; }
 
 /* panels */
-.panel { display: grid; gap: 14px; align-content: start; }
+.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-content: start; }
 .panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 16px; flex-wrap: wrap; }
 .panel-controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; max-width: 100%; }
 .panel-body { display: grid; gap: 8px; min-width: 0; }
