@@ -1,6 +1,6 @@
 [
-  { "file": "1-overview.jpg", "path": "#/", "viewport": { "width": 1280, "height": 800 }, "ready": ".hero-chart .chart-svg" },
+  { "file": "1-overview.jpg", "path": "#/", "viewport": { "width": 1280, "height": 776 }, "ready": ".hero-chart .chart-svg" },
   { "file": "2-economy.jpg", "path": "#/economy", "viewport": { "width": 1280, "height": 800 }, "ready": ".panel .chart-svg", "scrollTo": ".grid-panels", "scrollOffset": 76 },
-  { "file": "3-compare.jpg", "path": "#/compare", "viewport": { "width": 1280, "height": 800 }, "ready": ".bubble", "scrollTo": ".view > section:nth-of-type(2)", "scrollOffset": 330 },
+  { "file": "3-compare.jpg", "path": "#/compare", "viewport": { "width": 1280, "height": 800 }, "ready": ".bubble", "scrollTo": ".view > section:nth-of-type(1)", "scrollOffset": 76 },
   { "file": "4-phone.jpg", "path": "#/economy", "viewport": { "width": 390, "height": 844 }, "ready": ".panel .chart-svg", "scrollTo": ".grid-panels", "scrollOffset": 70 }
 ]

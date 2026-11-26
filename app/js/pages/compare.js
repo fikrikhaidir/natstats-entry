@@ -88,6 +88,6 @@ export async function render() {
   await loadTopics('peers');
   return h('div', { class: 'view' },
     pageHeader({ kicker: 'Compare', title: 'Indonesia and nine other countries', lede: 'Its Southeast Asian neighbours, the other giants of the developing world, and two rich economies for scale.', chips: ['10 countries', '15 indicators', 'Latest year for each'] }),
-    rankingCard(),
-    bubbleCard());
+    bubbleCard(),
+    rankingCard());
 }

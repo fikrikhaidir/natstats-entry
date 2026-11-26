@@ -28,21 +28,41 @@ export function bubbleScatter({ dots, xFormat, yFormat, xTitle, yTitle, height =
     }
     root.append(svg('text', { x: (pad.l + width - pad.r) / 2, y: height - 6, class: 'axis-title', 'text-anchor': 'middle', text: xTitle }));
     root.append(svg('text', { x: 6, y: 12, class: 'axis-title', text: yTitle }));
-    // Labels go above or below their bubble in turn (ordered left to right) so neighbours stay readable.
-    const order = [...dots].sort((p, q) => p.x - q.x);
-    for (const dot of [...dots].sort((p, q) => q.size - p.size)) {
-      const r = 6 + Math.sqrt(dot.size / maxSize) * 18;
-      const cx = x(dot.x);
-      const cy = y(dot.y);
-      const home = dots.find((d) => d.highlight);
-      const nextToHome = !dot.highlight && home && Math.abs(Math.log10(dot.x / home.x)) < 0.12; // neighbours of the highlighted bubble go above it
-      const above = dot.highlight ? false : nextToHome || order.indexOf(dot) % 2 === 1;
-      const place = { x: Math.min(cx, width - 30), y: above ? cy - r - 6 : cy + r + 14, anchor: 'middle' };
+    // Every label is tried in several spots around its bubble (below, above, right, left, then further out)
+    // and takes the first one that touches no other bubble and no label already placed.
+    const circles = dots.map((dot) => ({ dot, cx: x(dot.x), cy: y(dot.y), r: 6 + Math.sqrt(dot.size / maxSize) * 18 }));
+    const boxes = [];
+    const hitsCircle = (box, c) => {
+      const nx = Math.max(box.x0, Math.min(c.cx, box.x1));
+      const ny = Math.max(box.y0, Math.min(c.cy, box.y1));
+      return (nx - c.cx) ** 2 + (ny - c.cy) ** 2 < (c.r + 2) ** 2;
+    };
+    const hitsBox = (a, b) => a.x0 < b.x1 + 2 && a.x1 > b.x0 - 2 && a.y0 < b.y1 + 2 && a.y1 > b.y0 - 2;
+    const placed = new Map();
+    for (const me of [...circles].sort((p, q) => q.r - p.r)) {
+      const w = me.dot.label.length * 6.4;
+      const spots = [];
+      spots.push({ cx: me.cx, base: me.cy + me.r + 13 }, { cx: me.cx, base: me.cy - me.r - 5 });
+      spots.push({ cx: me.cx - me.r - 6 - w / 2, base: me.cy + 4 }, { cx: me.cx + me.r + 6 + w / 2, base: me.cy + 4 });
+      for (const gap of [17, 29]) spots.push({ cx: me.cx, base: me.cy + me.r + gap + 8 }, { cx: me.cx, base: me.cy - me.r - gap });
+      let best = null;
+      for (const spot of spots) {
+        const cx = Math.max(pad.l + w / 2, Math.min(spot.cx, width - 6 - w / 2));
+        const box = { x0: cx - w / 2, x1: cx + w / 2, y0: spot.base - 11, y1: spot.base + 3 };
+        const cost = circles.filter((c) => c !== me && hitsCircle(box, c)).length + boxes.filter((b) => hitsBox(box, b)).length * 2 + (box.y0 < 18 || box.y1 > height - pad.b + 4 ? 3 : 0);
+        if (!best || cost < best.cost) best = { cost, box, cx, base: spot.base };
+        if (cost === 0) break;
+      }
+      boxes.push(best.box);
+      placed.set(me.dot, best);
+    }
+    for (const { dot, cx, cy, r } of circles) {
+      const spot = placed.get(dot);
       root.append(
         svg('g', { class: dot.highlight ? 'bubble is-home' : 'bubble' },
           svg('title', { text: `${dot.label}: ${xFormat(dot.x)} per person, ${yFormat(dot.y)}` }),
           svg('circle', { cx, cy, r }),
-          svg('text', { x: place.x, y: place.y, 'text-anchor': place.anchor, text: dot.label })),
+          svg('text', { x: spot.cx, y: spot.base, 'text-anchor': 'middle', text: dot.label })),
       );
     }
     wrap.replaceChildren(root);

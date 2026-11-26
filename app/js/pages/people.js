@@ -9,7 +9,7 @@ export const render = () =>
   renderTopic({
     topic: 'people',
     title: 'Who lives in Indonesia',
-    lede: 'The fourth most populous country is still growing, but more slowly each decade, and it is becoming older and more urban.',
+    lede: 'One of the four most populous countries (World Bank, 2025) is still growing, but more slowly each decade, and it is becoming older and more urban.',
     headline: ['SP.POP.TOTL', 'SP.POP.GROW', 'SP.URB.TOTL.IN.ZS', 'SP.DYN.TFRT.IN'],
     notes: () => {
       const young = latestOf('SP.POP.0014.TO.ZS');
