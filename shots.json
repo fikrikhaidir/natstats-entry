@@ -1,0 +1,6 @@
+[
+  { "file": "1-overview.jpg", "path": "#/", "viewport": { "width": 1280, "height": 800 }, "ready": ".hero-chart .chart-svg" },
+  { "file": "2-economy.jpg", "path": "#/economy", "viewport": { "width": 1280, "height": 800 }, "ready": ".panel .chart-svg", "scrollTo": ".grid-stats", "scrollOffset": 90 },
+  { "file": "3-compare.jpg", "path": "#/compare", "viewport": { "width": 1280, "height": 800 }, "ready": ".ranked", "scrollTo": ".page-head", "scrollOffset": 70 },
+  { "file": "4-phone.jpg", "path": "#/people", "viewport": { "width": 390, "height": 844 }, "ready": ".panel .chart-svg" }
+]
